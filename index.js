@@ -33,14 +33,21 @@ let newlist = [...listoffile];
 let list = {};
 var count = 3;
 
-listofcandidate.forEach((itm,index)=>{
-  var arr = []
-    new Array(count).fill('').forEach((it1,index2)=>{
-        const randomno = Math.floor(Math.random()* newlist.length)
-        arr = [...arr,newlist[randomno]]
-        list[listofcandidate[index]] = arr
-        newlist = newlist.filter((e,i)=>i!==randomno)
-    })
-})
-console.log(list)
+const getlist = (i) => {
+  var arr = [];
+  new Array(count).fill('').forEach((it1, index2) => {
+    const randomno = Math.floor(Math.random() * newlist.length);
+    arr = [...arr, newlist[randomno]];
+    list[listofcandidate[i]] = arr;
+    newlist = newlist.filter((e, i) => i !== randomno);
+  });
 
+  if (listofcandidate[i]) {
+    getlist((i = i + 1));
+  }
+
+  return list
+};
+
+
+console.log(getlist(0));
